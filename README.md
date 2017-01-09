@@ -12,15 +12,18 @@ Tensorflow implementation of Automatic Portrait Matting on paper "Automatic Port
 ## Data
 
 mkdir Model_zoo and download http://www.vlfeat.org/matconvnet/models/beta16/imagenet-vgg-verydeep-19.mat
+
 download data from http://xiaoyongshen.me/webpages/webpage_automatting/
+
 mkdir data and copy the following folders and files into data/:
-  images_mask/
-  images_tracker/
-  portraitFCN_data/
-  portraitFCN+_data/
-  meanmask.png
-  testlist.mat
-  trainlist.mat
+
+  * images_mask/
+  * images_tracker/
+  * portraitFCN_data/
+  * portraitFCN+_data/
+  * meanmask.png
+  * testlist.mat
+  * trainlist.mat
 
 ## How to run
 
@@ -44,5 +47,7 @@ After train, predict:
 ## Ackownledge
 
 Thanks for Xiaoyong Shen and its paper
+
 "Deep Automatic Portrait Matting" Xiaoyong Shen, Xin Tao, Hongyun Gao, Chao Zhou, Jiaya Jia. European Conference on Computer Vision (ECCV), 2016
+
 I can't reach the performance in this paper. So please modify it as you want and inform me if any improvements.
