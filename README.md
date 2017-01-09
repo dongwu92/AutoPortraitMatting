@@ -2,13 +2,15 @@
 Tensorflow implementation of Automatic Portrait Matting on paper "Automatic Portrait Segmentation for Image Stylization"
 
 1. Requirement
-Tensorflow
-scipy
-six
-PIL
-numpy
+
++Tensorflow
++scipy
++six
++PIL
++numpy
 
 2. Data
+
 mkdir Model_zoo and download http://www.vlfeat.org/matconvnet/models/beta16/imagenet-vgg-verydeep-19.mat
 download data from http://xiaoyongshen.me/webpages/webpage_automatting/
 mkdir data and copy the following folders and files into data/:
@@ -21,14 +23,18 @@ mkdir data and copy the following folders and files into data/:
   trainlist.mat
 
 3. How to run
+
 FCN.py and FCN_puls.py implements the two models in that paper.
 To train:
+
 `
   if __name__ == "__main__":
       tf.app.run()
       #pred()
 `
+
 After train, predict:
+
 `
   if __name__ == "__main__":
       #tf.app.run()
@@ -36,6 +42,7 @@ After train, predict:
 `
 
 4. Ackownledge
+
 Thanks for Xiaoyong Shen and its paper
 "Deep Automatic Portrait Matting" Xiaoyong Shen, Xin Tao, Hongyun Gao, Chao Zhou, Jiaya Jia. European Conference on Computer Vision (ECCV), 2016
 I can't reach the performance in this paper. So please modify it as you want and inform me if any improvements.
