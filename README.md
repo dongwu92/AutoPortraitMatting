@@ -23,13 +23,17 @@ mkdir data and copy the following folders and files into data/:
 3. How to run
 FCN.py and FCN_puls.py implements the two models in that paper.
 To train:
+`
   if __name__ == "__main__":
       tf.app.run()
       #pred()
+`
 After train, predict:
+`
   if __name__ == "__main__":
       #tf.app.run()
       pred()
+`
 
 4. Ackownledge
 Thanks for Xiaoyong Shen and its paper
