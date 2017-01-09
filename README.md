@@ -30,3 +30,8 @@ After train, predict:
   if __name__ == "__main__":
       #tf.app.run()
       pred()
+
+4. Ackownledge
+Thanks for Xiaoyong Shen and its paper
+"Deep Automatic Portrait Matting" Xiaoyong Shen, Xin Tao, Hongyun Gao, Chao Zhou, Jiaya Jia. European Conference on Computer Vision (ECCV), 2016
+I can't reach the performance in this paper. So please modify it as you want and inform me if any improvements.
