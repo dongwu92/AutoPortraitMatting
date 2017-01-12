@@ -13,7 +13,7 @@ Tensorflow implementation of Automatic Portrait Matting on paper "Automatic Port
 
 mkdir Model_zoo and download http://www.vlfeat.org/matconvnet/models/beta16/imagenet-vgg-verydeep-19.mat
 
-download data from http://xiaoyongshen.me/webpages/webpage_automatting/
+download data from http://xiaoyongshen.me/webpage_portrait/index.html
 
 mkdir data and copy the following folders and files into data/:
 
