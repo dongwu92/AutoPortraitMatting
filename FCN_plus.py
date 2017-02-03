@@ -3,7 +3,7 @@ import tensorflow as tf
 import numpy as np
 
 import TensorflowUtils_plus as utils
-import read_MITSceneParsingData as scene_parsing
+#import read_MITSceneParsingData as scene_parsing
 import datetime
 #import BatchDatsetReader as dataset
 from portrait_plus import BatchDatset, TestDataset
