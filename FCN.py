@@ -126,7 +126,7 @@ def inference(image, keep_prob):
         fuse_2 = tf.add(conv_t2, image_net["pool3"], name="fuse_2")
 
         shape = tf.shape(image)
-        deconv_shape3 = tf.pack([shape[0], shape[1], shape[2], NUM_OF_CLASSESS])
+        deconv_shape3 = tf.stack([shape[0], shape[1], shape[2], NUM_OF_CLASSESS])
         W_t3 = utils.weight_variable([16, 16, NUM_OF_CLASSESS, deconv_shape2[3].value], name="W_t3")
         b_t3 = utils.bias_variable([NUM_OF_CLASSESS], name="b_t3")
         conv_t3 = utils.conv2d_transpose_strided(fuse_2, W_t3, b_t3, output_shape=deconv_shape3, stride=8)
@@ -189,7 +189,7 @@ def main(argv=None):
     saver = tf.train.Saver()
     summary_writer = tf.train.SummaryWriter(FLAGS.logs_dir, sess.graph)
 
-    sess.run(tf.initialize_all_variables())
+    sess.run(tf.global_variables_initializer()())
     ckpt = tf.train.get_checkpoint_state(FLAGS.logs_dir)
     if ckpt and ckpt.model_checkpoint_path:
         saver.restore(sess, ckpt.model_checkpoint_path)
@@ -220,7 +220,7 @@ def main(argv=None):
         valid_loss = sess.run(loss, feed_dict={image: valid_images, annotation: valid_annotations,
                                                        keep_probability: 1.0})
         print("%s ---> Validation_loss: %g" % (datetime.datetime.now(), valid_loss))'''
-        
+
         itr += 1
         train_images, train_annotations = train_dataset_reader.next_batch()
 
@@ -239,6 +239,7 @@ def main(argv=None):
             utils.save_image(pred[itr].astype(np.uint8), FLAGS.logs_dir, name="pred_" + str(5+itr))
             print("Saved image: %d" % itr)'''
 
+
 def pred():
     keep_probability = tf.placeholder(tf.float32, name="keep_probabilty")
     image = tf.placeholder(tf.float32, shape=[None, IMAGE_HEIGHT, IMAGE_WIDTH, 3], name="input_image")
@@ -247,7 +248,7 @@ def pred():
     pred_annotation, logits = inference(image, keep_probability)
     test_dataset_reader = TestDataset('data/testlist.mat')
     with tf.Session() as sess:
-        sess.run(tf.initialize_all_variables())
+        sess.run(tf.global_variables_initializer())
         ckpt = tf.train.get_checkpoint_state(FLAGS.logs_dir)
         saver = tf.train.Saver()
         if ckpt and ckpt.model_checkpoint_path:
