@@ -152,13 +152,13 @@ def main(argv=None):
     annotation = tf.placeholder(tf.int32, shape=[None, IMAGE_HEIGHT, IMAGE_WIDTH, 1], name="annotation")
 
     pred_annotation, logits = inference(image, keep_probability)
-    tf.image_summary("input_image", image, max_images=2)
-    tf.image_summary("ground_truth", tf.cast(annotation, tf.uint8), max_images=2)
-    tf.image_summary("pred_annotation", tf.cast(pred_annotation, tf.uint8), max_images=2)
+    tf.summary.image("input_image", image, max_outputs=2)
+    tf.summary.image("ground_truth", tf.cast(annotation, tf.uint8), max_outputs=2)
+    tf.summary.image("pred_annotation", tf.cast(pred_annotation, tf.uint8), max_outputs=2)
     loss = tf.reduce_mean((tf.nn.sparse_softmax_cross_entropy_with_logits(logits,
                                                                           tf.squeeze(annotation, squeeze_dims=[3]),
                                                                           name="entropy")))
-    tf.scalar_summary("entropy", loss)
+    tf.summary.scalar("entropy", loss)
 
     trainable_var = tf.trainable_variables()
     if FLAGS.debug:
@@ -167,7 +167,7 @@ def main(argv=None):
     train_op = train(loss, trainable_var)
 
     print("Setting up summary op...")
-    summary_op = tf.merge_all_summaries()
+    summary_op = tf.summary.merge_all()
 
     '''
     print("Setting up image reader...")
@@ -187,9 +187,9 @@ def main(argv=None):
 
     print("Setting up Saver...")
     saver = tf.train.Saver()
-    summary_writer = tf.train.SummaryWriter(FLAGS.logs_dir, sess.graph)
+    summary_writer = tf.summary.FileWriter(FLAGS.logs_dir, sess.graph)
 
-    sess.run(tf.global_variables_initializer()())
+    sess.run(tf.global_variables_initializer())
     ckpt = tf.train.get_checkpoint_state(FLAGS.logs_dir)
     if ckpt and ckpt.model_checkpoint_path:
         saver.restore(sess, ckpt.model_checkpoint_path)
