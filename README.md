@@ -9,6 +9,8 @@ Tensorflow implementation of Automatic Portrait Matting on paper "Automatic Port
 * PIL
 * numpy
 
+
+
 ## Data
 
 mkdir Model_zoo and download http://www.vlfeat.org/matconvnet/models/beta16/imagenet-vgg-verydeep-19.mat
@@ -18,12 +20,16 @@ download data from http://xiaoyongshen.me/webpage_portrait/index.html
 mkdir data and copy the following folders and files into data/:
 
   * images_mask/
+  * images_data/
+  * images_data_crop/
   * images_tracker/
   * portraitFCN_data/
   * portraitFCN+_data/
   * meanmask.png
   * testlist.mat
   * trainlist.mat
+
+Some of the folders data above, will be obtained by additional scripting. To obtain additional data, run the `data_download.m` and `generate_data_file.m` respectively
 
 ## How to run
 
