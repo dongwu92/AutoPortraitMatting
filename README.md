@@ -52,7 +52,7 @@ After train, predict:
 
 ## Ackownledge
 
-Thanks for Xiaoyong Shen and its paper
+Thanks for Xiaoyong Shen and his paper
 
 "Deep Automatic Portrait Matting" Xiaoyong Shen, Xin Tao, Hongyun Gao, Chao Zhou, Jiaya Jia. European Conference on Computer Vision (ECCV), 2016
 
