@@ -12,24 +12,24 @@ rorations = [-45, -22, 22, 45]
 gammas = [.05, 0.8, 1.2, 1.5]
 
 def gen_data(name):
-    reftracker = scio.loadmat('data/images_tracker.00047.mat')
-    desttracker = scio.loadmat('data/images_tracker/'+name+'.mat')
+    reftracker = scio.loadmat('data/images_tracker.00047.mat')['tracker']
+    desttracker = scio.loadmat('data/images_tracker/'+name+'.mat')['tracker']
     refpos = np.floor(np.mean(reftracker, 0))
     xxc, yyc = np.meshgrid(np.arange(1, 1801, dtype=np.int), np.arange(1, 2001, dtype=np.int))
     #normalize x and y channels
     xxc = (xxc - 600 - refpos[0]) * 1.0 / 600
     yyc = (yyc - 600 - refpos[1]) * 1.0 / 600
-    maskimg = Image.open('data/meanask.png')
+    maskimg = Image.open('data/meanmask.png')
     maskc = np.array(maskimg, dtype=np.float)
     maskc = np.pad(maskc, (600, 600), 'minimum')
-    tform = transform.ProjectiveTransform()
-    tform.estimate(reftracker + 600, desttracker + 600)
-
+    # warp is an inverse transform, and so src and dst must be reversed here
+    tform = transform.estimate_transform('affine', desttracker + 600, reftracker + 600)
+    
     img_data = skio.imread('data/images_data/'+name+'.jpg')
     # save org mat
-    warpedxx = transform.warp(img_data, tform, output_shape=xxc.shape)
-    warpedyy = transform.warp(img_data, tform, output_shape=xxc.shape)
-    warpedmask = transform.warp(img_data, tform, output_shape=xxc.shape)
+    warpedxx = transform.warp(xxc, tform, output_shape=xxc.shape)
+    warpedyy = transform.warp(yyc, tform, output_shape=xxc.shape)
+    warpedmask = transform.warp(maskc, tform, output_shape=xxc.shape)
     warpedxx = warpedxx[600:1400, 600:1200, :]
     warpedyy = warpedyy[600:1400, 600:1200, :]
     warpedmask = warpedmask[600:1400, 600:1200, :]
