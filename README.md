@@ -49,6 +49,11 @@ After train, predict:
       #tf.app.run()
       pred()
 `
+## Datasets
+由于shenxiaoyong网站崩溃，提供数据的百度云下载链接
+Link: http://pan.baidu.com/s/1dE14537 
+Password: ndg8
+仅供学术交流，如有引用，请通知原作者。
 
 ## Ackownledge
 
